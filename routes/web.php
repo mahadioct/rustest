@@ -19,4 +19,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\Home\HomeController::class, 'index'])->name('home');
+
+Route::prefix('department/')->name('department.')->group(function () {
+    Route::get('index', [App\Http\Controllers\Department\DepartmentController::class, 'index'])->name('index');
+    Route::get('create', [App\Http\Controllers\Department\DepartmentController::class, 'create'])->name('create');
+});

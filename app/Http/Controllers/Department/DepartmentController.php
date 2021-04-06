@@ -27,6 +27,7 @@ class DepartmentController extends Controller
     }
 
     /**
+     * Display all Department
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
@@ -36,6 +37,7 @@ class DepartmentController extends Controller
     }
 
     /**
+     * Display creat new department modal
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
@@ -44,6 +46,7 @@ class DepartmentController extends Controller
     }
 
     /**
+     * Insert a new department
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|string
      */
@@ -58,6 +61,7 @@ class DepartmentController extends Controller
     }
 
     /**
+     * Edit a department
      * @param $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
@@ -68,6 +72,7 @@ class DepartmentController extends Controller
     }
 
     /**
+     * Update a department
      * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
      */
@@ -82,6 +87,7 @@ class DepartmentController extends Controller
     }
 
     /**
+     * Delete a department
      * @param Request $request
      */
     public function destroy(Request $request){

@@ -38,7 +38,7 @@
                             <div class="row justify-content-center">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-save"></i>
-                                    Save
+                                    Update
                                 </button>
                             </div>
                         </form>

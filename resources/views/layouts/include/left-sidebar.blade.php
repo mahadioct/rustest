@@ -23,11 +23,18 @@
         Manage
     </div>
 
-    <!-- Nav Item - Tables -->
+    <!-- Nav Item - Department -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route('department.index') }}">
             <i class="fas fa-fw fa-table"></i>
             <span>Departments</span></a>
+    </li>
+
+    <!-- Nav Item - Position -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('position.index') }}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Position</span></a>
     </li>
 
     <!-- Divider -->

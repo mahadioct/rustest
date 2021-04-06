@@ -1,5 +1,5 @@
 @extends('layouts.back-end')
-@section('title','RusTest | Department')
+@section('title','RusTest | Position')
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -8,10 +8,10 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="card-title text-dark">Department List</div>
+                                <div class="card-title text-dark">Position List</div>
                             </div>
                             <div class="col-md-6 text-right">
-                                <button class="btn btn-sm btn-primary" onclick="CreateDepartment()">
+                                <button class="btn btn-sm btn-primary" onclick="CreatePosition()">
                                     <i class="fa fa-plus"></i>
                                     Create
                                 </button>
@@ -20,29 +20,32 @@
                         <hr>
                         <div class="row">
                             <div class="col-md-12">
-                                <table class="table table-bordered text-center" id="departmentTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered text-center" id="positionTable" width="100%"
+                                       cellspacing="0">
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
+                                        <th>Position Name</th>
+                                        <th>Department Name</th>
                                         <th>Date</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @if(!$departments->isEmpty())
-                                        @foreach($departments as $item)
+                                    @if(!$positions->isEmpty())
+                                        @foreach($positions as $item)
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
                                                 <td>{{$item->name}}</td>
+                                                <td>{{$item->department_name}}</td>
                                                 <td>{{date('d.m.Y',strtotime($item->created_at))}}</td>
                                                 <td>
-                                                    <a href="{{route('department.edit',['id'=> $item->id])}}"
+                                                    <a href="{{route('position.edit',['id'=> $item->id])}}"
                                                        type="button" class="btn btn-sm btn-warning">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                     <button type="button" class="btn btn-sm btn-danger"
-                                                            onclick="deleteDepartment({{$item->id}})">
+                                                            onclick="deletePosition({{$item->id}})">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </td>
@@ -67,12 +70,12 @@
         }
 
         $(document).ready(function () {
-            $('#departmentTable').DataTable();
+            $('#positionTable').DataTable();
         });
 
-        function CreateDepartment() {
+        function CreatePosition() {
             $.ajax({
-                url: '{{ route('department.create') }}',
+                url: '{{ route('position.create') }}',
                 type: 'GET',
                 data: {},
                 success: function (response) {
@@ -82,7 +85,7 @@
             })
         }
 
-        function deleteDepartment(id) {
+        function deletePosition(id) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -94,7 +97,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '{{ route('department.destroy') }}',
+                        url: '{{ route('position.destroy') }}',
                         type: 'GET',
                         data: {id: id},
                         success: function () {

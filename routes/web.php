@@ -24,4 +24,8 @@ Route::get('/home', [App\Http\Controllers\Home\HomeController::class, 'index'])-
 Route::prefix('department/')->name('department.')->group(function () {
     Route::get('index', [App\Http\Controllers\Department\DepartmentController::class, 'index'])->name('index');
     Route::get('create', [App\Http\Controllers\Department\DepartmentController::class, 'create'])->name('create');
+    Route::post('store', [App\Http\Controllers\Department\DepartmentController::class, 'store'])->name('store');
+    Route::get('edit/{id}', [App\Http\Controllers\Department\DepartmentController::class, 'edit'])->name('edit');
+    Route::post('update', [App\Http\Controllers\Department\DepartmentController::class, 'update'])->name('update');
+    Route::get('destroy', [App\Http\Controllers\Department\DepartmentController::class, 'destroy'])->name('destroy');
 });

@@ -4,7 +4,8 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<form action="" method="post">
+<form action="{{ route('department.store') }}" method="post">
+    @csrf
     <div class="modal-body">
         <div class="row justify-content-center">
             <div class="col-md-6">

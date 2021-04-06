@@ -15,6 +15,9 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('/') }}back-end/css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="{{ asset('/') }}back-end/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -85,6 +88,14 @@
 <!-- Page level custom scripts -->
 <script src="{{ asset('/') }}back-end/js/demo/chart-area-demo.js"></script>
 <script src="{{ asset('/') }}back-end/js/demo/chart-pie-demo.js"></script>
+<script src="{{ asset('/') }}back-end/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="{{ asset('/') }}back-end/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="{{ asset('/') }}back-end/js/demo/datatables-demo.js"></script>
+
+<!-- Sweet Alert 2 cdn -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 @yield('script')
 </body>
 </html>

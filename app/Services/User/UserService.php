@@ -42,16 +42,28 @@ class UserService
         return $user_array;
     }
 
+    /**
+     * Query for get department list
+     * @return \Illuminate\Support\Collection
+     */
     public function getDepartmentList(): \Illuminate\Support\Collection
     {
         return DB::table('departments')->orderBy('updated_at', 'desc')->get();
     }
 
+    /**
+     * Query for position list
+     * @return \Illuminate\Support\Collection
+     */
     public function getPositionList(): \Illuminate\Support\Collection
     {
         return DB::table('positions')->orderBy('updated_at', 'desc')->get();
     }
 
+    /**
+     * Query for get a user for edit
+     * @return array
+     */
     public function getUser($id): array
     {
         $user = DB::table('users')
@@ -78,6 +90,10 @@ class UserService
         return $user_array;
     }
 
+    /**
+     * Query for update a user
+     * @return
+     */
     public function updateUser($data)
     {
         DB::transaction(function () use ($data) {

@@ -39,7 +39,7 @@ class PositionController extends Controller
      */
     public function create()
     {
-        $departments = DB::table('departments')->orderBy('updated_at','desc')->get();
+        $departments = $this->position->getDepartmentList();
         return view('back-end.position.create',compact('departments'));
     }
 
@@ -65,7 +65,7 @@ class PositionController extends Controller
      */
     public function edit($id)
     {
-        $departments = DB::table('departments')->orderBy('updated_at','desc')->get();
+        $departments = $this->position->getDepartmentList();
         $position = $this->position->getPosition($id);
         return view('back-end.position.edit', compact('position','departments'));
     }

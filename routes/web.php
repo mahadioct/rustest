@@ -67,3 +67,16 @@ Route::prefix('position/')->name('position.')->group(function () {
     // Delete a position
     Route::get('destroy', [App\Http\Controllers\Position\PositionController::class, 'destroy'])->name('destroy');
 });
+
+// Route group of user
+Route::prefix('user/')->name('user.')->group(function () {
+
+    // Display user index page
+    Route::get('index', [App\Http\Controllers\User\UserController::class, 'index'])->name('index');
+
+    // Edit a user index page
+    Route::get('edit/{id}', [App\Http\Controllers\User\UserController::class, 'edit'])->name('edit');
+
+    // Update user index page
+    Route::post('update', [App\Http\Controllers\User\UserController::class, 'update'])->name('update');
+});

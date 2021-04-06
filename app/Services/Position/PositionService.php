@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * Class PositionService
- * @package App\Services\Position
+ * @package App\Services\PositionService
  */
 class PositionService
 {
@@ -35,6 +35,15 @@ class PositionService
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
+    }
+
+    /**
+     * Get Department List
+     * @return \Illuminate\Support\Collection
+     */
+    public function getDepartmentList(): \Illuminate\Support\Collection
+    {
+        return DB::table('departments')->orderBy('updated_at', 'desc')->get();
     }
 
     /**

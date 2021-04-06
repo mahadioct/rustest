@@ -6,26 +6,47 @@ use App\Services\Department\DepartmentService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * Class DepartmentController
+ * @package App\Http\Controllers\Department
+ */
 class DepartmentController extends Controller
 {
+    /**
+     * @var DepartmentService
+     */
     private $department;
 
+    /**
+     * DepartmentController constructor.
+     * @param DepartmentService $department
+     */
     public function __construct(DepartmentService $department)
     {
         $this->department = $department;
     }
 
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index()
     {
         $departments = $this->department->getDepartmentList();
         return view('back-end.department.index', compact('departments'));
     }
 
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function create()
     {
         return view('back-end.department.create');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|string
+     */
     public function store(Request $request)
     {
         try {
@@ -36,12 +57,20 @@ class DepartmentController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function edit($id)
     {
         $department = $this->department->getDepartment($id);
         return view('back-end.department.edit', compact('department'));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
+     */
     public function update(Request $request)
     {
         try {
@@ -52,6 +81,9 @@ class DepartmentController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     */
     public function destroy(Request $request){
         $this->department->destroyDepartment($request);
     }

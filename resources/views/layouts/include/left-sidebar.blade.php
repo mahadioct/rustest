@@ -43,8 +43,23 @@
             <i class="fas fa-fw fa-table"></i>
             <span>Users</span></a>
     </li>
-
-    <!-- Divider -->
+@can('manage_role_permission')
+    <!-- Nav Item - Manage Role & Permission Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Role & Permission</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{route('permission.index')}}">Permission</a>
+                    <a class="collapse-item" href="{{route('role.index')}}">Role</a>
+                </div>
+            </div>
+        </li>
+@endcan
+<!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
     <!-- Sidebar Toggler (Sidebar) -->

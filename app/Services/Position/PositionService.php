@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * Class PositionService
- * @package App\Services\PositionService
+ * @package App\Services\Position\PositionService
  */
 class PositionService
 {

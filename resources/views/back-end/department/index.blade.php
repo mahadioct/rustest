@@ -11,16 +11,19 @@
                                 <div class="card-title text-dark">Department List</div>
                             </div>
                             <div class="col-md-6 text-right">
-                                <button class="btn btn-sm btn-primary" onclick="CreateDepartment()">
-                                    <i class="fa fa-plus"></i>
-                                    Create
-                                </button>
+                                @can('create')
+                                    <button class="btn btn-sm btn-primary" onclick="CreateDepartment()">
+                                        <i class="fa fa-plus"></i>
+                                        Create
+                                    </button>
+                                @endcan
                             </div>
                         </div>
                         <hr>
                         <div class="row">
                             <div class="col-md-12">
-                                <table class="table table-bordered text-center" id="departmentTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered text-center" id="departmentTable" width="100%"
+                                       cellspacing="0">
                                     <thead>
                                     <tr>
                                         <th>#</th>
@@ -37,14 +40,18 @@
                                                 <td>{{$item->name}}</td>
                                                 <td>{{date('d.m.Y',strtotime($item->created_at))}}</td>
                                                 <td>
-                                                    <a href="{{route('department.edit',['id'=> $item->id])}}"
-                                                       type="button" class="btn btn-sm btn-warning">
-                                                        <i class="fa fa-edit"></i>
-                                                    </a>
-                                                    <button type="button" class="btn btn-sm btn-danger"
-                                                            onclick="deleteDepartment({{$item->id}})">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
+                                                    @can('edit')
+                                                        <a href="{{route('department.edit',['id'=> $item->id])}}"
+                                                           type="button" class="btn btn-sm btn-warning">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                    @endcan
+                                                    @can('delete')
+                                                        <button type="button" class="btn btn-sm btn-danger"
+                                                                onclick="deleteDepartment({{$item->id}})">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach

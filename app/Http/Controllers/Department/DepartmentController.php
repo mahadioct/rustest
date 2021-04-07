@@ -24,6 +24,7 @@ class DepartmentController extends Controller
     public function __construct(DepartmentService $department)
     {
         $this->department = $department;
+        $this->middleware('auth');
     }
 
     /**

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * Class DepartmentService
- * @package App\Services\Department
+ * @package App\Services\Department\DepartmentService
  */
 class DepartmentService
 {

@@ -11,10 +11,12 @@
                                 <div class="card-title text-dark">Position List</div>
                             </div>
                             <div class="col-md-6 text-right">
-                                <button class="btn btn-sm btn-primary" onclick="CreatePosition()">
-                                    <i class="fa fa-plus"></i>
-                                    Create
-                                </button>
+                                @can('create')
+                                    <button class="btn btn-sm btn-primary" onclick="CreatePosition()">
+                                        <i class="fa fa-plus"></i>
+                                        Create
+                                    </button>
+                                @endcan
                             </div>
                         </div>
                         <hr>
@@ -40,14 +42,18 @@
                                                 <td>{{$item->department_name}}</td>
                                                 <td>{{date('d.m.Y',strtotime($item->created_at))}}</td>
                                                 <td>
-                                                    <a href="{{route('position.edit',['id'=> $item->id])}}"
-                                                       type="button" class="btn btn-sm btn-warning">
-                                                        <i class="fa fa-edit"></i>
-                                                    </a>
-                                                    <button type="button" class="btn btn-sm btn-danger"
-                                                            onclick="deletePosition({{$item->id}})">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
+                                                    @can('edit')
+                                                        <a href="{{route('position.edit',['id'=> $item->id])}}"
+                                                           type="button" class="btn btn-sm btn-warning">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                    @endcan
+                                                    @can('delete')
+                                                        <button type="button" class="btn btn-sm btn-danger"
+                                                                onclick="deletePosition({{$item->id}})">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach

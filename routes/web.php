@@ -74,9 +74,80 @@ Route::prefix('user/')->name('user.')->group(function () {
     // Display user index page
     Route::get('index', [App\Http\Controllers\User\UserController::class, 'index'])->name('index');
 
+    // Create new user
+    Route::get('create', [App\Http\Controllers\User\UserController::class, 'create'])->name('create');
+
+    // Create a new position
+    Route::post('store', [App\Http\Controllers\User\UserController::class, 'store'])->name('store');
+
     // Edit a user index page
     Route::get('edit/{id}', [App\Http\Controllers\User\UserController::class, 'edit'])->name('edit');
 
     // Update user index page
     Route::post('update', [App\Http\Controllers\User\UserController::class, 'update'])->name('update');
+
+    // Delete a user
+    Route::get('destroy', [App\Http\Controllers\User\UserController::class, 'destroy'])->name('destroy');// Delete a user
+
+    // Upload user profile photo
+    Route::get('upload/photo', [App\Http\Controllers\User\UserController::class, 'uploadPhoto'])->name('upload.photo'); // Upload user profile photo
+
+    // Update profile photo
+    Route::post('update/profile/photo', [App\Http\Controllers\User\UserController::class, 'updateProfilePhoto'])->name('update.profile.photo');
+
+    // Assign Role to a user
+    Route::get('assign/role/{id}', [App\Http\Controllers\User\UserController::class, 'assignRole'])->name('assign.role');
+
+    // Update assign Role to a user
+    Route::post('assign/role/update', [App\Http\Controllers\User\UserController::class, 'assignRoleUpdate'])->name('assign.role.update');
+});
+
+// Route group of Permission
+Route::prefix('permission/')->name('permission.')->group(function () {
+
+    // Display permission index page
+    Route::get('index', [App\Http\Controllers\Permission\PermissionController::class, 'index'])->name('index');
+
+    // Display permission create modal
+    Route::get('create', [App\Http\Controllers\Permission\PermissionController::class, 'create'])->name('create');
+
+    // Create a new permission
+    Route::post('store', [App\Http\Controllers\Permission\PermissionController::class, 'store'])->name('store');
+
+    // Edit a permission
+    Route::get('edit/{id}', [App\Http\Controllers\Permission\PermissionController::class, 'edit'])->name('edit');
+
+    // Update a permission
+    Route::post('update', [App\Http\Controllers\Permission\PermissionController::class, 'update'])->name('update');
+
+    // Delete a permission
+    Route::get('destroy', [App\Http\Controllers\Permission\PermissionController::class, 'destroy'])->name('destroy');
+});
+
+// Route group of Role
+Route::prefix('role/')->name('role.')->group(function () {
+
+    // Display role index page
+    Route::get('index', [App\Http\Controllers\Role\RoleController::class, 'index'])->name('index');
+
+    // Display role create modal
+    Route::get('create', [App\Http\Controllers\Role\RoleController::class, 'create'])->name('create');
+
+    // Create a new role
+    Route::post('store', [App\Http\Controllers\Role\RoleController::class, 'store'])->name('store');
+
+    // Create a new role
+    Route::get('assign/permission/{id}', [App\Http\Controllers\Role\RoleController::class, 'assignPermission'])->name('assign.permission');
+
+    // Create a new role
+    Route::post('assign/permission/update', [App\Http\Controllers\Role\RoleController::class, 'assignPermissionUpdate'])->name('assign.permission.update');
+
+    // Edit a role
+    Route::get('edit/{id}', [App\Http\Controllers\Role\RoleController::class, 'edit'])->name('edit');
+
+    // Update a role
+    Route::post('update', [App\Http\Controllers\Role\RoleController::class, 'update'])->name('update');
+
+    // Delete a role
+    Route::get('destroy', [App\Http\Controllers\Role\RoleController::class, 'destroy'])->name('destroy');
 });

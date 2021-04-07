@@ -1,58 +1,60 @@
 <?php
 
-namespace App\Http\Controllers\Position;
+namespace App\Http\Controllers\Permission;
 
-use App\Services\Position\PositionService;
+use App\Services\Permission\PermissionService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
 
-class PositionController extends Controller
+/**
+ * Class PermissionController
+ * @package App\Http\Controllers\Permission
+ */
+class PermissionController extends Controller
 {
     /**
-     * @var PositionService
+     * @var PermissionService
      */
-    private $position;
+    private $permission;
 
     /**
-     * PositionController constructor.
-     * @param PositionService $position
+     * PermissionController constructor.
+     * @param PermissionService $permission
      */
-    public function __construct(PositionService $position)
+    public function __construct(PermissionService $permission)
     {
-        $this->position = $position;
+        $this->permission = $permission;
         $this->middleware('auth');
     }
 
     /**
-     * Display all position
+     * Display All Permission
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        $positions = $this->position->getPositionList();
-        return view('back-end.position.index', compact('positions'));
+        $permissions = $this->permission->getAllPermission();
+        return view('back-end.permission.index', compact('permissions'));
     }
 
     /**
-     * Display creat new position modal
+     * Create a permission
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
-        $departments = $this->position->getDepartmentList();
-        return view('back-end.position.create',compact('departments'));
+        return view('back-end.permission.create');
     }
 
     /**
-     * Insert a new position
+     * Store a permission
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|string
      */
     public function store(Request $request)
     {
         try {
-            $this->position->storePosition($request);
+            $this->permission->createPermission($request);
             return redirect()->back();
         } catch (\Exception $e) {
             return $e->getMessage();
@@ -60,37 +62,37 @@ class PositionController extends Controller
     }
 
     /**
-     * Edit a position
+     * Edit a permission
      * @param $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit($id)
     {
-        $departments = $this->position->getDepartmentList();
-        $position = $this->position->getPosition($id);
-        return view('back-end.position.edit', compact('position','departments'));
+        $permission = $this->permission->getPermission($id);
+        return view('back-end.permission.edit', compact('permission'));
     }
 
     /**
-     * Update a position
+     * Update a permission
      * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
      */
     public function update(Request $request)
     {
         try {
-            $this->position->updatePosition($request);
-            return redirect(route('position.index'));
+            $this->permission->updatePermission($request);
+            return redirect(route('permission.index'));
         } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
 
     /**
-     * Delete a position
+     * Delete a permission
      * @param Request $request
      */
-    public function destroy(Request $request){
-        $this->position->destroyPosition($request);
+    public function destroy(Request $request)
+    {
+        $this->permission->deletePermission($request);
     }
 }

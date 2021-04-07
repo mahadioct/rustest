@@ -16,7 +16,17 @@ rustest will
 8. The progress of work is displayed by commits in the GIT.
 9. To demonstrate the result of the work, use one of the popular repositories GitHub, BitBucket, or others.
 
+Users ------
+Admin User - admin@gmail.com
+Admin Pass = 12345678
 
+Manager User - manager@gmail.com
+Manager Pass = 12345678
+
+User User - user@gmail.com
+User Pass = 12345678
+
+**** sql file is provided ****
 
 ## Development setup
 At first clone the repository from github
@@ -36,3 +46,5 @@ To generate entity to the database:
 ```
 php artisan migrate
 ```
+
+

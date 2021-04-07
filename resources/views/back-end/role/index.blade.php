@@ -1,5 +1,5 @@
 @extends('layouts.back-end')
-@section('title','RusTest | Users')
+@section('title','RusTest | Role')
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -8,11 +8,11 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="card-title text-dark">User List</div>
+                                <div class="card-title text-dark">Role List</div>
                             </div>
                             <div class="col-md-6 text-right">
                                 @can('create')
-                                    <button class="btn btn-sm btn-primary" onclick="CreatePosition()">
+                                    <button class="btn btn-sm btn-primary" onclick="createRole()">
                                         <i class="fa fa-plus"></i>
                                         Create
                                     </button>
@@ -22,53 +22,47 @@
                         <hr>
                         <div class="row">
                             <div class="col-md-12">
-                                <table class="table table-bordered text-center" id="userTable" width="100%"
+                                <table class="table table-bordered text-center" id="roleTable" width="100%"
                                        cellspacing="0">
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>User Name</th>
-                                        <th>E-Mail</th>
-                                        <th>Position Name</th>
-                                        <th>Department Name</th>
+                                        <th>Role Name</th>
+                                        <th>Permissions</th>
                                         <th>Date</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @if(!empty($users))
-                                        @foreach($users as $item)
+                                    @if(!$roles->isEmpty())
+                                        @foreach($roles as $item)
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
-                                                <td>{{$item['name']}}</td>
-                                                <td>{{$item['email']}}</td>
-                                                <td>{{$item['position_name']}}</td>
+                                                <td>{{$item->name}}</td>
                                                 <td>
-                                                    @if(!empty($item['department_name']))
-                                                        @foreach($item['department_name'] as $key => $data)
-                                                            {{$data->department_name}}@if($key+1 == count($item['department_name'])) @else
+                                                    @if(!$item->permissions->isEmpty())
+                                                        @foreach($item->permissions as $key => $data)
+                                                            {{$data->name}}@if($key+1 == count($item->permissions)) @else
                                                                 , @endif
                                                         @endforeach
                                                     @endif
                                                 </td>
-                                                <td>{{date('d.m.Y',strtotime($item['updated_at']))}}</td>
+                                                <td>{{date('d.m.Y',strtotime($item->created_at))}}</td>
                                                 <td>
-                                                    @can('assign_role')
-                                                        <a href="{{route('user.assign.role',['id' => $item['id']])}}"
+                                                    @can('edit')
+                                                        <a href="{{route('role.assign.permission',['id'=> $item->id])}}"
                                                            type="button" class="btn btn-sm btn-success">
                                                             <i class="fa fa-edit"></i>
-                                                            Assign Role
+                                                            Assign Permission
                                                         </a>
-                                                    @endcan
-                                                    @can('edit')
-                                                        <a href="{{route('user.edit',['id' => $item['id']])}}"
+                                                        <a href="{{route('role.edit',['id'=> $item->id])}}"
                                                            type="button" class="btn btn-sm btn-warning">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
                                                     @endcan
                                                     @can('delete')
                                                         <button type="button" class="btn btn-sm btn-danger"
-                                                                onclick="deleteUser({{$item['id']}})">
+                                                                onclick="deleteRole({{$item->id}})">
                                                             <i class="fa fa-trash"></i>
                                                         </button>
                                                     @endcan
@@ -88,13 +82,14 @@
 @endsection
 @section('script')
     <script>
+
         $(document).ready(function () {
-            $('#userTable').DataTable();
+            $('#roleTable').DataTable();
         });
 
-        function CreatePosition() {
+        function createRole() {
             $.ajax({
-                url: '{{ route('user.create') }}',
+                url: '{{ route('role.create') }}',
                 type: 'GET',
                 data: {},
                 success: function (response) {
@@ -104,7 +99,7 @@
             })
         }
 
-        function deleteUser(id) {
+        function deleteRole(id) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -116,7 +111,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '{{ route('user.destroy') }}',
+                        url: '{{ route('role.destroy') }}',
                         type: 'GET',
                         data: {id: id},
                         success: function () {
@@ -125,10 +120,7 @@
                                 'Your file has been deleted.',
                                 'success'
                             )
-                            sleep(3000).then(() => {
-                                location.reload();
-                            });
-
+                            location.reload();
                         },
                         error: function () {
                             Swal.fire(
